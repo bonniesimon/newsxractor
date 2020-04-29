@@ -20,3 +20,9 @@ const init = () => {
 
 
 init();
+
+
+/**
+ * TODO:Use shetty api to save the articles. Use it as a DB
+ * TODO:Use some ml to extract only usefull part of the article. a.k.a make the article lesser in size.
+ */
