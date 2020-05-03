@@ -1,7 +1,11 @@
 const axios = require('axios').default;
 require('dotenv').config()
 
-const country = 'in'
+const country = 'in';
+
+/**
+ * Enter the date of which the news article will be taken
+ */
 const DATE = '2020-05-01';
 
 const postSheety = async (title, content, publishedAt, url) => {
