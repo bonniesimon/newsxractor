@@ -1,16 +1,15 @@
 const axios = require('axios').default;
+require('dotenv').config()
 
-
-const API_KEY = "7c05f0db88f64b74bdd1bf3b0a8e3329";
 const country = 'in'
-const DATE = '2020-04-06';
+const DATE = '2020-05-01';
 
 const postSheety = async (title, content, publishedAt, url) => {
     try{
         /**
          * !Sheety wants the body to be covered in a root object with name of endpoint, here sheet1
          */
-        const response = await axios.post('https://v2-api.sheety.co/aa990fdf93ff1104c7f79ed60b30c09c/newsxractor/sheet1',{
+        const response = await axios.post(process.env.SHEETY_URL,{
             sheet1:{
                 title,
                 publishedAt,
@@ -29,7 +28,7 @@ const postSheety = async (title, content, publishedAt, url) => {
  */
 const fecthData = async (date) => {
     try{
-        const response = await axios.get(`https://newsapi.org/v2/everything?q=india&from=${date}&to=${date}&pageSize=2&apiKey=7c05f0db88f64b74bdd1bf3b0a8e3329`); 
+        const response = await axios.get(`https://newsapi.org/v2/everything?q=india&from=${date}&to=${date}&pageSize=2&apiKey=${process.env.API_KEY}`); 
         // response.data.articles is an *array
         // const {title, publishedAt, content, url} = response.data.articles[0];
         response.data.articles.map(article => {
@@ -70,7 +69,7 @@ const init = () => {
     // while(newDate !== '2020-04-30'){
     //     newDate = incr_date(newDate);
     //     console.log(newDate);
-
+        
     // }
     fecthData(DATE);
 }
@@ -80,6 +79,6 @@ init();
 
 
 /**
- * TODO:Use shetty api to save the articles. Use it as a DB
+ * //TODO:Use shetty api to save the articles. Use it as a DB
  * TODO:Use some ml to extract only usefull part of the article. a.k.a make the article lesser in size.
  */
